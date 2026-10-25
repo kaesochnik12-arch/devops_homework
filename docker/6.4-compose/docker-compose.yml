@@ -25,6 +25,16 @@ services:
     container_name: gilmutdinov-rg-netology-pushgateway
     ports:
       - "9091:9091"
+  grafana:
+    image: grafana/grafana:latest
+    container_name: gilmutdinov-rg-netology-grafana
+    ports: 
+      - "80:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./custom.ini:/etc/grafana/custom.ini:ro
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/custom.ini
 networks:
   default:
     name: gilmutdinov-rg-my-netology-hw
@@ -33,3 +43,4 @@ networks:
         - subnet: 10.5.0.0/16 
 volumes: 
   prometheus_data:
+  grafana_data:
